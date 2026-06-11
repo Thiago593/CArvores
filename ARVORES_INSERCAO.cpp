@@ -1,4 +1,4 @@
-/* ARVORE BINÁRIA */
+/* ARVORE */
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -18,49 +18,49 @@ void inserirDireita(No *no, int valor);
 	
 void inserirEsquerda(No *no, int valor){
 	if(no->esquerda == NULL){
-		No *Novo = (No*)malloc(sizeof(No)); //alocação dinâmica na memória heap
-		Novo->conteudo = valor; //Novo nó recebe o valor
+		No *Novo = (No*)malloc(sizeof(No)); //alocaÃ§Ã£o dinÃ¢mica na memÃ³ria heap
+		Novo->conteudo = valor; //Novo nÃ³ recebe o valor
 		Novo->esquerda = NULL; //direita e esquerda nulos
 		Novo->direita = NULL;
-		no->esquerda = Novo; //inserção à esquerda
+		no->esquerda = Novo; //inserÃ§Ã£o Ã  esquerda
 	}
-	else{ //verificação de qual sub-arvore o valor irá ser salvo
-		if(valor < no->esquerda->conteudo) // Menor --> Esquerda do nó esquerdo
+	else{ //verificaÃ§Ã£o de qual sub-arvore o valor irÃ¡ ser salvo
+		if(valor < no->esquerda->conteudo) // Menor --> Esquerda do nÃ³ esquerdo
 			inserirEsquerda(no->esquerda, valor);
-		if(valor > no->esquerda->conteudo) // Impede repetição
-			inserirDireita(no->esquerda, valor); // Maior --> Direita do nó esquerdo
+		if(valor > no->esquerda->conteudo) // Impede repetiÃ§Ã£o
+			inserirDireita(no->esquerda, valor); // Maior --> Direita do nÃ³ esquerdo
 	}
 }
 
 void inserirDireita(No *no, int valor){
 	if(no->direita == NULL){
-		No *Novo = (No*)malloc(sizeof(No)); //alocação dinâmica na memória heap
-		Novo->conteudo = valor; //Novo nó recebe o valor
+		No *Novo = (No*)malloc(sizeof(No)); //alocaÃ§Ã£o dinÃ¢mica na memÃ³ria heap
+		Novo->conteudo = valor; //Novo nÃ³ recebe o valor
 		Novo->esquerda = NULL; //direita e esquerda nulos
 		Novo->direita = NULL;
-		no->direita = Novo; //inserção à direita
+		no->direita = Novo; //inserÃ§Ã£o Ã  direita
 	}
 	else{
-		if(valor > no->direita->conteudo) // Maior --> Direita do nó direito
+		if(valor > no->direita->conteudo) // Maior --> Direita do nÃ³ direito
 			inserirDireita(no->direita, valor);
 		if(valor < no->direita->conteudo)
-			inserirEsquerda(no->direita, valor); // Menor --> Esquerda do nó direito
+			inserirEsquerda(no->direita, valor); // Menor --> Esquerda do nÃ³ direito
 	}
 }
 
 void inserir(ArvBinaria *arvore, int valor){ 
-	if(arvore->raiz == NULL){ //Raiz Nula (Primeira inserção)
-		No *Novo = (No*)malloc(sizeof(No)); //alocação dinâmica na memória heap
-		Novo->conteudo = valor; //Novo nó recebe o valor
+	if(arvore->raiz == NULL){ //Raiz Nula (Primeira inserÃ§Ã£o)
+		No *Novo = (No*)malloc(sizeof(No)); //alocaÃ§Ã£o dinÃ¢mica na memÃ³ria heap
+		Novo->conteudo = valor; //Novo nÃ³ recebe o valor
 		Novo->esquerda = NULL; //direita e esquerda nulos
 		Novo->direita = NULL;
-		arvore->raiz = Novo; // Raiz passa a ser o valor do primeiro nó
+		arvore->raiz = Novo; // Raiz passa a ser o valor do primeiro nÃ³
 	}
 	else{
 		if(valor < arvore->raiz->conteudo)
-			inserirEsquerda(arvore->raiz, valor); //inserção à esquerda
+			inserirEsquerda(arvore->raiz, valor); //inserÃ§Ã£o Ã  esquerda
 		if(valor > arvore->raiz->conteudo)
-			inserirDireita(arvore->raiz, valor); // inserção à direita
+			inserirDireita(arvore->raiz, valor); // inserÃ§Ã£o Ã  direita
 	}
 }
 
@@ -68,56 +68,56 @@ int tamanho(No *raiz){
 	if (raiz == NULL)
 		return 0;
 	else
-		return 1 + tamanho(raiz->esquerda) + tamanho(raiz->direita); // Tamanho à esquerda e à direita
+		return 1 + tamanho(raiz->esquerda) + tamanho(raiz->direita); // Tamanho Ã  esquerda e Ã  direita
 }
 
 int pesquisar (No *raiz, int elemento){
-	if(raiz == NULL){ //raiz nula --> árvore vazia
+	if(raiz == NULL){ //raiz nula --> Ã¡rvore vazia
 		return -1;
 	}
 	else{
 		if(raiz->conteudo == elemento) 
 			return raiz->conteudo;
 		else{
-			if(elemento<raiz->conteudo) //verificação da árvore à esquerda
+			if(elemento<raiz->conteudo) //verificaÃ§Ã£o da Ã¡rvore Ã  esquerda
 				return pesquisar(raiz->esquerda, elemento) ;
 			else
-				return pesquisar(raiz->direita, elemento); //verificação da árvore à direita
+				return pesquisar(raiz->direita, elemento); //verificaÃ§Ã£o da Ã¡rvore Ã  direita
 			
 		}
 	}
 }
 
-/* Remoção de nós folhas */
+/* RemoÃ§Ã£o de nÃ³s folhas */
 No* remover(No *raiz, int elemento){
-	if(raiz == NULL){ //Verifica se a raiz está vazia
-	printf("Valor não encontrado\n");
+	if(raiz == NULL){ //Verifica se a raiz estÃ¡ vazia
+	printf("Valor nÃ£o encontrado\n");
 		return NULL;
 	}
 	else{
-		/* Remoção de nós folhas */
+		/* RemoÃ§Ã£o de nÃ³s folhas */
 		if(raiz->conteudo == elemento){
 			if(raiz->esquerda == NULL && raiz->direita == NULL){
 				free(raiz);
 				return NULL;
 			}
-			/* Remoção de nós com direita ou esquerda */
+			/* RemoÃ§Ã£o de nÃ³s com direita ou esquerda */
 			else{
 				if(raiz->esquerda == NULL || raiz->direita == NULL){
 					No *aux;
-					if(raiz->esquerda != NULL) // Esquerda é nula?
-						aux = raiz->esquerda; //Salva o nó a esquerda
+					if(raiz->esquerda != NULL) // Esquerda Ã© nula?
+						aux = raiz->esquerda; //Salva o nÃ³ a esquerda
 					else
-						aux = raiz->direita; //Salva o nó a direita
+						aux = raiz->direita; //Salva o nÃ³ a direita
 						
 					free(raiz); //Remove a raiz
-					return aux; //Retorna o endereço salvo 
+					return aux; //Retorna o endereÃ§o salvo 
 				}
-			/* Remoção de nós com direita e esquerda */
+			/* RemoÃ§Ã£o de nÃ³s com direita e esquerda */
 			else{
-				No *aux = raiz->esquerda; //Procurar o nó mais a direita da arvore esquerda
+				No *aux = raiz->esquerda; //Procurar o nÃ³ mais a direita da arvore esquerda
 				while(aux->direita != NULL){
-					aux = aux->direita; //Percorrendo a arvore até a folha
+					aux = aux->direita; //Percorrendo a arvore atÃ© a folha
 				}
 				raiz->conteudo = aux->conteudo;
 				aux->conteudo = elemento;
@@ -138,17 +138,17 @@ No* remover(No *raiz, int elemento){
 }
 
 No* pesquisarNo (No *raiz, int elemento){
-	if(raiz == NULL){ //raiz nula --> árvore vazia
+	if(raiz == NULL){ //raiz nula --> Ã¡rvore vazia
 		return NULL;
 	}
 	else{
 		if(raiz->conteudo == elemento) 
 			return raiz;
 		else{
-			if(elemento<raiz->conteudo) //verificação da árvore à esquerda
+			if(elemento<raiz->conteudo) //verificaÃ§Ã£o da Ã¡rvore Ã  esquerda
 				return pesquisarNo(raiz->esquerda, elemento) ;
 			else
-				return pesquisarNo(raiz->direita, elemento); //verificação da árvore à direita
+				return pesquisarNo(raiz->direita, elemento); //verificaÃ§Ã£o da Ã¡rvore Ã  direita
 			
 		}
 	}
@@ -156,9 +156,9 @@ No* pesquisarNo (No *raiz, int elemento){
 
 void exibirarv(No *raiz){
 	if(raiz != NULL){
-		exibirarv(raiz->esquerda); //todos à esquerda
-		printf("%d ", raiz->conteudo); // O nó
-		exibirarv(raiz->direita); // Todos à direita
+		exibirarv(raiz->esquerda); //todos Ã  esquerda
+		printf("%d ", raiz->conteudo); // O nÃ³
+		exibirarv(raiz->direita); // Todos Ã  direita
 	}
 }
 
@@ -216,14 +216,14 @@ int main(){
 	arvore.raiz = NULL; // sem uso de ponteiros
 	
 	while(1){	
-		printf("\nEscolha uma opção:\n");
+		printf("\nEscolha uma opÃ§Ã£o:\n");
 		printf("Sair ------------- [0]\n");
 		printf("Inserir ---------- [1]\n");
 		printf("Exibir ----------- [2]\n"); 
 		printf("Pesquisar -------- [3]\n");
 		printf("Remover ---------- [4]\n");
-		printf("Altura da árvore - [5]\n");
-		printf("Altura do Nó ----- [6]\n");
+		printf("Altura da Ã¡rvore - [5]\n");
+		printf("Altura do NÃ³ ----- [6]\n");
 		scanf("%d", &menu);
 	
 		switch(menu){
@@ -233,11 +233,11 @@ int main(){
 		break;
 		
 		case Inserir:
-			printf("Digite um número inteiro positivo:");
+			printf("Digite um nÃºmero inteiro positivo:");
 			scanf("%d", &valor);
 			
 			while(valor<0){
-				printf("Digite um número inteiro positivo:");
+				printf("Digite um nÃºmero inteiro positivo:");
 				scanf("%d", &valor);
 			}
 			
@@ -255,37 +255,37 @@ int main(){
 			break;
 		
 		case Pesquisar:
-			printf("Digite o valor a ser buscado na árvore:");
+			printf("Digite o valor a ser buscado na Ã¡rvore:");
 			scanf("%d", &valor);
 			if (pesquisar(arvore.raiz, valor) == -1){
-				printf("O elemento não existe na árvore\n");
+				printf("O elemento nÃ£o existe na Ã¡rvore\n");
 			}
 			else
-				printf("O elemento existe na árvore\n");
+				printf("O elemento existe na Ã¡rvore\n");
 			break;
 		
 		case Remover:
-			printf("Digite um elemento da árvore a ser removido:");
+			printf("Digite um elemento da Ã¡rvore a ser removido:");
 			scanf("%d", &valor);	
 			arvore.raiz = remover(arvore.raiz, valor);
 			break;
 			
 		case AlturaRaiz:
-			printf("A altura da árvore é: %d\n", alturaRaiz(arvore.raiz));
+			printf("A altura da Ã¡rvore Ã©: %d\n", alturaRaiz(arvore.raiz));
 		break;
 		
 		case AlturaNo:
 			printf("Digite o valor a ser calculada a altura:");
 			scanf("%d", &valor);
 			if (alturaNo(arvore.raiz, valor) == -1){
-				printf("O elemento não existe na árvore\n");
+				printf("O elemento nÃ£o existe na Ã¡rvore\n");
 			}
 			else
-				printf("A altura do nó é: %d\n", alturaNo(arvore.raiz, valor));
+				printf("A altura do nÃ³ Ã©: %d\n", alturaNo(arvore.raiz, valor));
 		break;
 		
 		default:
-			printf("Escolha inválida!");
+			printf("Escolha invÃ¡lida!");
 		}
 	}
 }
